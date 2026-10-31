@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2457c5"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="GlucoTrack"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>GlucoTrack — Glucose Journal</title><style>
+:root{--ink:#202b3c;--muted:#64748b;--line:#e2e8f0;--blue:#2457c5;--bg:#f5f7fb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.wrap{max-width:1050px;margin:auto;padding:20px}.quicknav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}.quicknav a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 13px;border-radius:10px;background:#fff;border:1px solid var(--line);color:#2446a6;text-decoration:none;font-size:13px;font-weight:750}.quicknav a:hover{background:#eef2ff}.top,.hero,.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:14px}.brand{display:flex;gap:12px;align-items:center}.logo{background:var(--blue);color:white;border-radius:14px;padding:12px 16px;font-size:23px;font-weight:800}.brand h1{margin:0;font-size:24px}.brand p,.sub{margin:3px 0 0;color:var(--muted);font-size:13px}.tag{background:white;border:1px solid var(--line);border-radius:99px;padding:8px 12px;font-size:12px;font-weight:700}.hero{margin:20px 0;background:linear-gradient(110deg,#173f9d,#3477df);color:white;border-radius:20px;padding:24px}.hero h2{margin:0 0 7px;font-size:25px}.hero p{margin:0;color:#e7efff}.badge{background:#ffffff22;border:1px solid #ffffff55;padding:10px 12px;border-radius:12px;white-space:nowrap;font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;min-width:0;box-shadow:0 2px 8px #1f29370a}.metric-label{font-size:13px;color:var(--muted)}.metric{font-size:27px;font-weight:800;margin:7px 0}.metric small{font-size:12px;color:var(--muted)}.metric-note{font-size:12px;color:var(--muted)}.cols{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}h3{font-size:17px;margin:0 0 4px}.chart svg{width:100%;height:auto;display:block}.legend{font-size:12px;color:var(--muted);margin-top:8px}.note{background:#eaf1ff;color:#2446a6;border-radius:10px;padding:11px 12px;font-size:13px;margin-top:12px}form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;color:#475569}input,select,button{font:inherit}input,select{width:100%;min-height:46px;padding:11px 12px;border:1px solid #cbd5e1;border-radius:10px;background:white;color:var(--ink)}input:focus,select:focus,button:focus,.quicknav a:focus{outline:3px solid #9dbaff;outline-offset:2px}.full{grid-column:1/-1}.btn{background:var(--blue);color:white;border:0;border-radius:10px;padding:12px 15px;min-height:44px;font-weight:750;cursor:pointer}.btn.secondary{background:#eef2ff;color:#2446a6;border:1px solid #c7d2fe}.tablewrap{overflow-x:auto}table{width:100%;min-width:560px;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px;font-size:13px}th{color:var(--muted);background:#f8fafc}.status{display:inline-block;padding:4px 7px;border-radius:99px;font-size:11px;font-weight:700}.in{background:#e9f8f0;color:#18794e}.out{background:#fff5d9;color:#946200}.foot{font-size:12px;color:var(--muted);padding:16px 2px;line-height:1.6}
+.device-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px}
+.device-option{border:1px solid var(--line);border-radius:13px;padding:15px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0}
+.device-option h4{margin:0;font-size:15px}.device-option p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.device-icon{width:38px;height:38px;border-radius:11px;background:#eaf1ff;color:#2446a6;display:grid;place-items:center;font-size:23px;font-weight:800}
+.device-feedback{font-size:12px!important;margin-top:2px!important}
+.device-summary{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted)}
+.file-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border-radius:10px;background:var(--blue);color:white;font-weight:750;cursor:pointer}
+.file-button:focus{outline:3px solid #9dbaff;outline-offset:2px}
+@media(max-width:750px){.device-grid{grid-template-columns:1fr}.device-option .btn,.file-button{width:100%;text-align:center}}
+
+@media(max-width:750px){.wrap{padding:13px}.quicknav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.quicknav a{padding:8px 5px;font-size:12px}.top{align-items:flex-start}.brand h1{font-size:21px}.tag{max-width:125px;text-align:center}.hero{align-items:flex-start;flex-direction:column;padding:19px}.hero h2{font-size:22px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cols{grid-template-columns:1fr}.card{padding:15px}.metric{font-size:24px}.sectionhead{align-items:flex-start;flex-wrap:wrap}form{grid-template-columns:1fr}.full{grid-column:auto}}
+
+.app-page{display:none}
+.app-page.active{display:block}
+.quicknav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.tab-btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 13px;border-radius:10px;background:#fff;border:1px solid var(--line);color:#2446a6;text-decoration:none;font-size:13px;font-weight:750;cursor:pointer}
+.tab-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tab-btn:hover{filter:brightness(.98)}
+[data-go]{margin:0}
+@media(max-width:750px){.quicknav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.tab-btn{padding:8px 5px;font-size:12px}}
+</style></head>
+<body><main class="wrap"><header class="top"><div class="brand"><div class="logo">G</div><div><h1>GlucoTrack</h1><p>Glucose journal &amp; personal trends</p></div></div><div class="tag">EDUCATIONAL PROTOTYPE</div></header><nav aria-label="Main navigation" class="quicknav"><button class="tab-btn active" data-page="overview" type="button">Overview</button><button class="tab-btn" data-page="add" type="button">＋ Add reading</button><button class="tab-btn" data-page="history" type="button">History &amp; trends</button><button class="tab-btn" data-page="devices" type="button">Devices</button><button class="tab-btn" data-page="about" type="button">About &amp; safety</button></nav><section class="app-page active" data-page-section="overview" id="page-overview"><section class="hero"><div><h2>Understand your glucose history.</h2><p>Record measurements, view trends, and review simple summaries to support conversations with your healthcare professional.</p></div><div class="badge">Demo profile · fictional data</div></section><section class="grid" id="summary"><div class="card"><div class="metric-label">Latest reading</div><div class="metric" id="latest">126 <small>mg/dL</small></div><div class="metric-note" id="latestWhen">Demo reading</div></div><div class="card"><div class="metric-label">Average</div><div class="metric" id="average">118 <small>mg/dL</small></div><div class="metric-note">Across recorded entries</div></div><div class="card"><div class="metric-label">Lowest / highest</div><div class="metric" id="range">92–146</div><div class="metric-note">mg/dL in this log</div></div><div class="card"><div class="metric-label">Entries in illustrative range</div><div class="metric" id="within">6 / 6</div><div class="metric-note">Illustrative 70–180 mg/dL</div></div></section><div class="card"><h3>Glucose trend</h3><p class="sub">Fictional recorded values · mg/dL</p><div aria-label="Chart of fictional glucose readings" class="chart" id="chart" role="img"></div><div class="legend">Blue line: recorded values · Green band: illustrative reference range</div><div class="note">The reference band is illustrative and may not match an individual's prescribed target.</div></div><div class="cols">
+<div class="card">
+<h3>Quick actions</h3><p class="sub">Jump to the part you need.</p>
+<p><button class="btn" data-go="add" type="button">＋ Add measurement</button></p>
+<p><button class="btn secondary" data-go="history" type="button">View measurement history</button></p>
+<p><button class="btn secondary" data-go="devices" type="button">Import a CSV file</button></p>
+</div>
+<div class="card">
+<h3>What GlucoTrack does</h3>
+<p>• Records measurements entered for the demo<br/>• Shows a simple trend chart and summary statistics<br/>• Supports CSV import for exported logs<br/>• Helps organize information for care conversations</p>
+<div class="note">This is a learning prototype, not a medical device or treatment recommendation.</div>
+</div>
+</div></section><section class="app-page" data-page-section="add" id="page-add"><section class="hero"><div><h2>Add a measurement</h2><p>Enter a fictional glucose reading to update your log and trend chart.</p></div><div class="badge">Demo data only</div></section><div class="card" id="add"><h3>Add a measurement</h3><p class="sub">Use fictional values for this demo.</p><form id="form"><div><label for="value">Glucose (mg/dL)</label><input id="value" max="800" min="20" placeholder="e.g. 120" required="" type="number"/></div><div><label for="date">Date &amp; time</label><input id="date" required="" type="datetime-local"/></div><div class="full"><label for="context">Measurement context</label><select id="context"><option>Fasting</option><option>Before meal</option><option selected="">After meal</option><option>Bedtime</option><option>Other</option></select></div><div class="full"><label for="notes">Note (optional)</label><input id="notes" maxlength="100" placeholder="e.g. walk after dinner"/></div><div class="full"><button class="btn" type="submit">Save measurement</button></div></form><div aria-live="polite" class="note" id="message">Save a reading to update the chart, history, and statistics automatically.</div></div></section><section class="app-page" data-page-section="history" id="page-history"><section class="hero"><div><h2>History &amp; trends</h2><p>Review recorded sample readings and simple summaries over time.</p></div><div class="badge">Fictional readings</div></section><div class="card" style="margin-bottom:16px"><h3>Glucose trend</h3><p class="sub">Fictional recorded values · mg/dL</p><div aria-label="Chart of fictional glucose readings" class="chart" id="chartHistory" role="img"></div><div class="legend">Blue line: recorded values · Green band: illustrative reference range</div><div class="note">The reference band is illustrative and may not match an individual's prescribed target.</div></div><section class="card" id="historySection"><div class="sectionhead"><div><h3>Measurement history</h3><p class="sub">Most recent entries first</p></div><button class="btn secondary" id="reset" type="button">Reset demo data</button></div><div class="tablewrap"><table><thead><tr><th>Date &amp; time</th><th>Glucose</th><th>Context</th><th>Note</th><th>Demo flag*</th></tr></thead><tbody id="history"></tbody></table></div><p class="sub">*The flag only compares values with the illustrative 70–180 mg/dL band. It is not a diagnosis.</p></section></section><section class="app-page" data-page-section="devices" id="page-devices"><section class="hero"><div><h2>Device connections</h2><p>Import a glucose log exported from another app, or review what device support would require.</p></div><div class="badge">No live device connection</div></section><section class="card" id="devices" style="margin-bottom:16px">
+<div class="sectionhead"><div><h3>Device Connections</h3><p class="sub">Connect a compatible meter or import an exported glucose log.</p></div><span class="status out" id="deviceStatus">Not connected</span></div>
+<div class="device-grid">
+<div class="device-option">
+<div aria-hidden="true" class="device-icon">↔</div>
+<div><h4>Bluetooth glucometer</h4><p>Real Bluetooth connection is not enabled in this prototype. Support depends on the meter model, protocol, browser, and manufacturer permissions.</p></div>
+<button class="btn secondary" id="bluetoothInfo" type="button">Check compatibility</button>
+<p aria-live="polite" class="device-feedback" id="bluetoothFeedback">No device has been connected.</p>
+</div>
+<div class="device-option">
+<div aria-hidden="true" class="device-icon">⇧</div>
+<div><h4>Import CSV file</h4><p>Import readings exported from a compatible meter app. Use the sample file to test this feature with fictional data.</p></div>
+<label class="file-button" for="csvFile">Choose CSV file</label>
+<input accept=".csv,text/csv" hidden="" id="csvFile" type="file"/>
+<button class="btn secondary" id="downloadSample" type="button">Download sample CSV</button>
+<p aria-live="polite" class="device-feedback" id="csvFeedback">Expected columns: value,date,context,notes. Dates should be readable by your browser.</p>
+</div>
+</div>
+<div class="device-summary"><span><b>Last sync:</b> <span id="lastSync">Never</span></span><span><b>Device readings imported:</b> <span id="importCount">0</span></span></div>
+<div class="note">Privacy note: this demo processes the selected CSV locally in the page. Do not upload real personal health data to this educational prototype. No device connection or cloud transfer occurs here.</div>
+</section></section><section class="app-page" data-page-section="about" id="page-about"><section class="hero"><div><h2>About GlucoTrack</h2><p>A student prototype for keeping glucose readings organized and easier to review over time.</p></div><div class="badge">Educational use only</div></section><div class="cols">
+<div class="card"><h3>Problem &amp; intended users</h3><p>People who monitor blood glucose may find it difficult to keep measurements in one place and notice simple patterns across days. GlucoTrack demonstrates a compact diary and trend view.</p><p><b>Intended users:</b> people who record glucose readings and want to organize information for conversations with their healthcare professional.</p></div>
+<div class="card"><h3>Key features</h3><p>• Manual measurement entry<br/>• History table and trend chart<br/>• Simple descriptive statistics<br/>• CSV import for exported readings<br/>• Mobile-friendly navigation</p></div>
+<div class="card"><h3>Data &amp; privacy</h3><p>The included readings are fictional. This prototype does not connect to a hospital record, send data to a server, or implement a real Bluetooth connection. Browser storage may be limited when opened as a local file.</p><p>A real product would require secure storage, access controls, consent, data minimization, and privacy review.</p></div>
+<div class="card"><h3>Limitations &amp; future work</h3><p>Current version is not clinically validated and does not diagnose, predict complications, or recommend insulin or medication changes. Future work could include validated device integrations, secure backup, accessibility testing, and clinical review.</p><div class="note">The illustrative 70–180 mg/dL band is not a personalized treatment target. Follow an individual's care plan and ask a healthcare professional about readings of concern.</div></div>
+</div></section><footer class="foot"><b>Safety &amp; privacy:</b> Student educational prototype using fictional sample data only. It is not connected to a glucose meter or medical record, does not diagnose diabetes, and does not recommend medication or insulin changes. Do not enter real personal health information. Real-world use would require privacy/security safeguards, clinical review, and validation. Follow your care plan and consult your healthcare professional about readings that concern you.</footer></main><script>
+(function(){
+const initial=[{v:110,d:'2026-10-24T08:00',c:'Fasting',n:'Demo entry'},{v:132,d:'2026-10-24T19:00',c:'After meal',n:'Demo entry'},{v:92,d:'2026-10-25T08:15',c:'Fasting',n:'Demo entry'},{v:146,d:'2026-10-25T20:00',c:'After meal',n:'Demo entry'},{v:102,d:'2026-10-26T08:10',c:'Fasting',n:'Demo entry'},{v:126,d:'2026-10-26T19:20',c:'After meal',n:'Demo entry'}];let data=(()=>{try{const saved=localStorage.getItem('glucotrack_readings_v1');return saved?JSON.parse(saved):initial.map(x=>({...x}));}catch(_){return initial.map(x=>({...x}));}})();const $=id=>document.getElementById(id);
+function safe(s){return String(s||'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function datefmt(s){let d=new Date(s);return Number.isNaN(d.getTime())?s:d.toLocaleString([],{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+function chart(list){let w=600,h=230,p=38,min=50,max=220,iw=w-2*p,ih=h-55,x=i=>p+(list.length<2?iw/2:i*iw/(list.length-1)),y=v=>12+(max-v)/ (max-min)*ih;let s=`<svg viewBox="0 0 ${w} ${h}" aria-label="Glucose trend chart"><rect x="${p}" y="${y(180)}" width="${iw}" height="${y(70)-y(180)}" fill="#e9f8f0" rx="4"/>`;[70,100,140,180,220].forEach(v=>s+=`<line x1="${p}" y1="${y(v)}" x2="${w-p}" y2="${y(v)}" stroke="#e2e8f0" stroke-dasharray="4 4"/><text x="${p-7}" y="${y(v)+4}" font-size="11" text-anchor="end" fill="#64748b">${v}</text>`);if(list.length>1)s+=`<polyline points="${list.map((d,i)=>x(i)+','+y(d.v)).join(' ')}" fill="none" stroke="#2457c5" stroke-width="3" stroke-linejoin="round"/>`;list.forEach((d,i)=>s+=`<circle cx="${x(i)}" cy="${y(d.v)}" r="5" fill="#2457c5" stroke="white" stroke-width="2"><title>${d.v} mg/dL</title></circle><text x="${x(i)}" y="${h-12}" font-size="10" text-anchor="middle" fill="#64748b">${safe(new Date(d.d).toLocaleDateString([],{month:'short',day:'numeric'}))}</text>`);$('chart').innerHTML=s+'</svg>';}
+function render(){try{localStorage.setItem('glucotrack_readings_v1',JSON.stringify(data));}catch(_){}let list=[...data].sort((a,b)=>new Date(a.d)-new Date(b.d)),vals=list.map(x=>x.v);if(vals.length){let last=list[list.length-1],avg=vals.reduce((a,b)=>a+b,0)/vals.length;$('latest').innerHTML=last.v+' <small>mg/dL</small>';$('latestWhen').textContent=datefmt(last.d)+' · '+last.c;$('average').innerHTML=Math.round(avg)+' <small>mg/dL</small>';$('range').textContent=Math.min(...vals)+'–'+Math.max(...vals);$('within').textContent=vals.filter(v=>v>=70&&v<=180).length+' / '+vals.length;}chart(list);$('history').innerHTML=[...list].reverse().map(e=>`<tr><td>${datefmt(e.d)}</td><td><b>${e.v} mg/dL</b></td><td>${safe(e.c)}</td><td>${safe(e.n)}</td><td><span class="status ${e.v>=70&&e.v<=180?'in':'out'}">${e.v>=70&&e.v<=180?'Within demo band':'Outside demo band'}</span></td></tr>`).join('')||'<tr><td colspan="5">No entries yet.</td></tr>';}
+$('form').addEventListener('submit',e=>{e.preventDefault();let v=Number($('value').value),d=$('date').value;if(!Number.isFinite(v)||v<20||v>800){$('message').textContent='Enter a value between 20 and 800 mg/dL for this demo.';return;}if(!d||Number.isNaN(new Date(d).getTime())){$('message').textContent='Choose a valid date and time.';return;}data.push({v,d,c:$('context').value,n:$('notes').value.trim()});render();$('message').textContent='Entry saved. Chart, history, and statistics updated.';$('form').reset();setDate();});
+function setDate(){let n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());$('date').value=n.toISOString().slice(0,16);}
+
+$('bluetoothInfo').addEventListener('click',()=>{
+  $('deviceStatus').textContent='Not connected';
+  $('deviceStatus').className='status out';
+  $('bluetoothFeedback').textContent='No physical connection was attempted. To implement Bluetooth, GlucoTrack needs a verified compatible meter model and its supported data protocol/API. This prototype does not scan for or connect to devices.';
+});
+$('downloadSample').addEventListener('click',()=>{
+  const csv='value,date,context,notes\n118,2026-10-27T08:00,Fasting,Fictional sample\n154,2026-10-27T19:30,After meal,Fictional sample\n105,2026-10-28T08:10,Fasting,Fictional sample\n';
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='GlucoTrack_sample_fictional.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  $('csvFeedback').textContent='Sample CSV downloaded. It contains fictional readings for testing only.';
+});
+$('csvFile').addEventListener('change',async e=>{
+  const file=e.target.files && e.target.files[0];if(!file)return;
+  try{
+    const text=await file.text();
+    const rows=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(line=>line.trim()!=='');
+    if(rows.length<2)throw new Error('The file has no data rows.');
+    const splitCSV=line=>{
+      const out=[];let field='',quoted=false;
+      for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(quoted&&line[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}else if(ch===','&&!quoted){out.push(field.trim());field='';}else field+=ch;}
+      out.push(field.trim());return out;
+    };
+    const headers=splitCSV(rows[0]).map(x=>x.toLowerCase());
+    const vi=headers.indexOf('value'),di=headers.indexOf('date'),ci=headers.indexOf('context'),ni=headers.indexOf('notes');
+    if(vi<0||di<0)throw new Error('Required columns not found. Include value and date; context and notes are optional.');
+    const imported=[];
+    for(let i=1;i<rows.length;i++){
+      const cols=splitCSV(rows[i]);if(cols.every(c=>!c))continue;
+      const v=Number(cols[vi]),d=cols[di];
+      if(!Number.isFinite(v)||v<20||v>800)throw new Error('Row '+(i+1)+': value must be between 20 and 800 mg/dL for this demo.');
+      if(!d||Number.isNaN(new Date(d).getTime()))throw new Error('Row '+(i+1)+': invalid date. Use a format such as 2026-10-27T08:00.');
+      imported.push({v,d,c:ci>=0&&cols[ci]?cols[ci]:'Imported',n:ni>=0?cols[ni]||'Imported CSV':'Imported CSV',source:'CSV import'});
+    }
+    if(!imported.length)throw new Error('No valid measurement rows found.');
+    data.push(...imported);render();
+    $('importCount').textContent=String(Number($('importCount').textContent)+imported.length);
+    $('lastSync').textContent=new Date().toLocaleString();
+    $('deviceStatus').textContent='CSV imported';$('deviceStatus').className='status in';
+    $('csvFeedback').textContent='Imported '+imported.length+' fictional/demo reading(s). Statistics, chart, and history updated.';
+    $('message').textContent='CSV import complete: '+imported.length+' reading(s) added.';
+  }catch(err){$('csvFeedback').textContent='Import failed: '+err.message;}
+  e.target.value='';
+});
+
+$('reset').addEventListener('click',()=>{data=initial.map(x=>({...x}));render();$('message').textContent='Demo data restored.';});setDate();render();
+})();
+
+
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.go)));
+function showPage(name){
+ document.querySelectorAll('[data-page-section]').forEach(p=>p.classList.toggle('active',p.dataset.pageSection===name));
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+ if(name==='history') drawHistoryChart();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function drawHistoryChart(){
+ const source=document.getElementById('chart');
+ const target=document.getElementById('chartHistory');
+ if(source&&target) target.innerHTML=source.innerHTML;
+}
+
+setTimeout(drawHistoryChart, 50);
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}
+</script></body></html>
